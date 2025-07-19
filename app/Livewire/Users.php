@@ -8,13 +8,19 @@ use Livewire\Component;
 
 class Users extends Component
 {
-    public function createUser()
+    public $name = '';
+    public $email = '';
+    public $password = '';
+
+    public function createNewUser()
     {
         User::create([
-            'name' => 'John doe',
-            'email' => 'doe@email.com',
-            'password' => Hash::make('password'),
+            'name' => $this->name,
+            'email' => $this->email,
+            'password' => Hash::make($this->password),
         ]);
+
+        $this->reset();
     }
 
     public function render()
