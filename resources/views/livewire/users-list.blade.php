@@ -1,4 +1,4 @@
-    <div class="w-1/3 my-10">
+    <div class="w-1/3 my-10" wire:poll.visible>
         <div class="mx-auto mb-4">
             <h2 class="mt-10 text-center text-2xl/9 font-bold tracking-tight text-gray-900">Users list</h2>
         </div>
