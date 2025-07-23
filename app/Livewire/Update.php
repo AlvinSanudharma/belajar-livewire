@@ -51,14 +51,23 @@ class Update extends Component
         $validated = $this->validate();
 
         if ($this->avatar) {
+            if (!empty($this->user->avatar)) {
+                Storage::disk('public')->delete($this->user->avatar);
+            }
+
             $validated['avatar'] = $this->avatar->store('avatar', 'public');
         }
 
-        $this->user->update([
+        $data = [
             'name' => $this->name,
             'email' => $this->email,
-            'avatar' =>  $validated['avatar']
-        ]);
+        ];
+
+        if ($this->avatar) {
+            $data['avatar'] = $validated['avatar'];
+        }
+
+        $this->user->update($data);
 
         $this->reset();
 
