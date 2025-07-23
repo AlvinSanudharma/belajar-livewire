@@ -28,6 +28,14 @@ class UsersList extends Component
         return User::latest()->where('name', 'like', '%'.$this->query.'%')->paginate(5);
     }
 
+    public function deleteUser($id) {
+        $user = User::where('id', $id)->firstOrFail();
+
+        $user->delete();
+
+        session()->flash('success', 'User successfully deleted.');
+    }
+
     public function placeholder() {
         return view('livewire.placeholder.skeleton');
     }

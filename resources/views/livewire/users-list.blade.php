@@ -1,7 +1,17 @@
     <div class="w-1/3 my-10" wire:poll.visible>
+
         <div class="mx-auto mb-4">
             <h2 class="mt-10 text-center text-2xl/9 font-bold tracking-tight text-gray-900">Users list</h2>
         </div>
+
+        @if (session('success'))
+            <div class="p-4 mt-6 mb-4 text-sm text-green-800 rounded-lg bg-green-50" role="alert" x-data="{
+                isShow: true,
+            }"
+                x-init="setTimeout(() => isShow = false, 1500)" x-show="isShow">
+                {{ session('success') }}
+            </div>
+        @endif
 
         <form class="max-w-lg mx-auto" wire:submit="search">
             <label for="default-search"
@@ -36,8 +46,18 @@
                     <div class="hidden shrink-0 sm:flex sm:flex-col sm:items-end self-center">
                         <p class="mt-1 text-xs/5 text-gray-500">Joined {{ $user->created_at->diffForHumans() }}
                         </p>
-                        <a href="/users/{{ $user->id }}" class="mt-1 text-xs/5 text-blue-500">Edit
-                        </a>
+                        <div class="flex items-center text-xs/5 mt-1" x-data>
+                            <a href="/users/{{ $user->id }}" class="text-xs/5 text-blue-500 inline-block mr-1">Edit
+                            </a>|
+                            </p>
+                            <button
+                                x-on:click.prevent="
+                                    if(confirm('Yakin ingin menghapus data?')) {
+                                        $wire.$call('deleteUser', {{ $user->id }});
+                                    }"
+                                class="text-xs/5 text-red-500 inline-block ml-1 cursor-pointer">Delete
+                            </button>
+                        </div>
                     </div>
                 </li>
             @endforeach
