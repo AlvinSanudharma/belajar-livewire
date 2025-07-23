@@ -72,6 +72,8 @@ class Update extends Component
         $this->reset();
 
         session()->flash('success', 'User successfully updated.');
+
+        $this->redirectIntended('/users');
     }
 
     public function render()

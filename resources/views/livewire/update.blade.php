@@ -2,18 +2,9 @@
     <div class="py-8 lg:py-16 px-4 mx-auto max-w-screen-md">
         <h2 class="mb-4 text-4xl tracking-tight font-extrabold text-center text-gray-900 dark:text-white">Update User
         </h2>
-        @if (session('success'))
-            <div class="p-4 mt-6 mb-4 text-sm text-green-800 rounded-lg bg-green-50" role="alert" x-data="{
-                isShow: true,
-            }"
-                x-init="setTimeout(() => isShow = false, 1500)" x-show="isShow">
-                {{ session('success') }}
-            </div>
-        @endif
         <form action="#" wire:submit.prevent="updateUser" class="space-y-8">
             <div>
-                <label for="name"
-                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Name</label>
+                <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Name</label>
                 <input wire:model="name" type="text" id="name"
                     class="block p-3 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 shadow-sm focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light"
                     placeholder="Let us know how we can help you">
