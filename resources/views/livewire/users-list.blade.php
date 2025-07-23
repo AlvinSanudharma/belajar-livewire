@@ -53,7 +53,7 @@
                             <button
                                 x-on:click.prevent="
                                     if(confirm('Yakin ingin menghapus data?')) {
-                                        $wire.$call('deleteUser', {{ $user->id }});
+                                        $wire.deleteUser({{ $user->id }});
                                     }"
                                 class="text-xs/5 text-red-500 inline-block ml-1 cursor-pointer">Delete
                             </button>

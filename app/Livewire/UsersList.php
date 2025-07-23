@@ -3,6 +3,7 @@
 namespace App\Livewire;
 
 use App\Models\User;
+use Illuminate\Support\Facades\Storage;
 use Livewire\Attributes\Computed;
 use Livewire\Attributes\On;
 use Livewire\Component;
@@ -30,6 +31,12 @@ class UsersList extends Component
 
     public function deleteUser($id) {
         $user = User::where('id', $id)->firstOrFail();
+
+        if ($user->avatar) {
+            if (!empty($user->avatar)) {
+                Storage::disk('public')->delete($user->avatar);
+            }
+        }
 
         $user->delete();
 
